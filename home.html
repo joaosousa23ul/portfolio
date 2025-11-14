@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Portfólio Fotográfico — João Sousa</title>
+
+  <!-- Fonte Inter (Google Fonts) -->
+  <link href="https://rsms.me/inter/inter.css" rel="stylesheet">
+
+  <!-- CSS externo -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <h1>Portfólio</h1>
+      <p class="lead">João Sousa — Fotografia & Cinema</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <p class="intro-text">
+        O meu nome é João Sousa, sou um jovem de 20 anos da cidade do Porto, desde sempre tive uma grande admiração à fotografia e ao cinema.  
+        Encontro na captação de imagem e movimento a forma mais completa de expressão.  
+        Estou a finalizar a licenciatura em Comunicação Audiovisual e Multimédia, nestes três anos percebi que através da imagem digital e do cinema consigo transmitir a minha visão do mundo.  
+        Este portfólio é uma pequena amostra da minha forma de observar e abordar o mundo através da fotografia, um pouco do meu quotidiano e imagens que fiz para projetos curriculares.
+      </p>
+    </section>
+
+    <section id="curricular" class="gallery-section">
+      <h2>Fotografia académica</h2>
+      <div class="gallery">
+        <img src="fotos/curricular/c1.jpg" alt="Projeto académico: composição urbana">
+        <img src="fotos/curricular/c4.jpg" alt="Estudo de luz natural">
+        <img src="fotos/curricular/c5.jpg" alt="Retrato em estúdio">
+        <img src="fotos/curricular/IMG_9638.jpg" alt="Experiência com macro">
+        <img src="fotos/curricular/DSC03164.JPG" alt="Experiência com macro">
+        <img src="fotos/curricular/c2.jpg" alt="Fotografia noturna">
+        <img src="fotos/curricular/c3.jpg" alt="Abstração geométrica">
+        <img src="fotos/curricular/WhatsApp Image 2025-06-01 at 11.01.08-2.jpeg" alt="Trabalho de grupo">
+        <img src="fotos/curricular/WhatsApp Image 2025-06-01 at 11.01.07-2.jpeg" alt="Sessão experimental">
+      </div>
+    </section>
+
+    <section id="rua" class="gallery-section">
+      <h2>Fotografia de rua</h2>
+      <div class="gallery">
+        <img src="fotos/street shoots/s1.JPG" alt="Rua em movimento">
+        <img src="fotos/street shoots/DSC00493.JPG" alt="Silhuetas urbanas">
+        <img src="fotos/street shoots/s2.jpg" alt="Reflexos na cidade">
+        <img src="fotos/street shoots/s3.jpg" alt="Pormenores do dia a dia">
+        <img src="fotos/street shoots/DSC04707.jpg" alt="Contraste de luz e sombra">
+        <img src="fotos/street shoots/DSC04769 - cópia.jpg" alt="Momento captado">
+        <img src="fotos/street shoots/s5.jpg" alt="Texturas da rua">
+        <img src="fotos/street shoots/IMG_0011 - cópia.JPG" alt="Texturas da rua">
+      </div>
+    </section>
+
+    <section id="analogica" class="gallery-section">
+      <h2>Film</h2>
+      <div class="gallery">
+        <img src="fotos/analogico/a1.TIF" alt="Película 35mm - Retrato">
+        <img src="fotos/analogico/IMG_4370.TIF" alt="Grão e textura analógica">
+        <img src="fotos/analogico/IMG_3634 - cópia.TIF" alt="Grão e textura analógica">
+        <img src="fotos/analogico/IMG_4380.TIF" alt="Luz suave em filme">
+        <img src="fotos/analogico/a2.TIF" alt="Experiência com dupla exposição">
+        <img src="fotos/analogico/a4.jpg" alt="Cor em película">
+        <img src="fotos/analogico/a.3.jpg" alt="Momentos em rolo">
+      </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+      <h2>Contacto</h2>
+      <p>Email: <strong>jotasousa2005@gmail.com</strong></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> — João Sousa</p>
+  </footer>
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <button id="prev" class="lb-btn prev" aria-label="Imagem anterior">‹</button>
+  <img src="" alt="Imagem ampliada">
+  <button id="next" class="lb-btn next" aria-label="Próxima imagem">›</button>
+  <button id="close" class="lb-btn close" aria-label="Fechar">×</button>
+</div>
+
+
+  <script>
+    // Ano dinâmico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lbImg = lightbox.querySelector('img');
+    const images = Array.from(document.querySelectorAll('.gallery img'));
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    const closeBtn = document.getElementById('close');
+    let idx = 0;
+
+    function openLightbox(i) {
+      idx = i;
+      lbImg.src = images[idx].src;
+      lbImg.alt = images[idx].alt;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    }
+
+    function prevImage() {
+      idx = (idx - 1 + images.length) % images.length;
+      lbImg.src = images[idx].src;
+      lbImg.alt = images[idx].alt;
+    }
+
+    function nextImage() {
+      idx = (idx + 1) % images.length;
+      lbImg.src = images[idx].src;
+      lbImg.alt = images[idx].alt;
+    }
+
+    // Eventos
+    images.forEach((img, i) => img.addEventListener('click', () => openLightbox(i)));
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    // Teclado
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+</body>
+</html>
